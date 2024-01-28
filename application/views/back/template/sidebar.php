@@ -88,18 +88,6 @@
                     </li>
 
 
-                    <!-- LAPORAN TIKET -->
-                    <li class="nav-header">LAPORAN TIKET</li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('laporan') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Laporan
-                            </p>
-                        </a>
-                    </li>
-
-
                     <!-- POFILE -->
                     <li class="nav-header">MY PROFILE</li>
                     <li class="nav-item">
