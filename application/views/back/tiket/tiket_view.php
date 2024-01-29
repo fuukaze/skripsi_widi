@@ -12,10 +12,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"> Data Tiket </h3>
+                        <?php if (!admin()) { ?>
                         <a href="<?= base_url('tiket/add_tiket') ?>" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#form_tiket"> Tambah Data </a>
+                        <?php } ?>
                     </div>
                     <div class="card-body">
                         <?= $this->session->flashdata('message'); ?>
+                        <?php if (admin()) { ?>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -97,6 +100,51 @@
                                 <?php } ?>
                             </tbody>
                         </table>
+                        <?php } else { ?>
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>No Tiket</th>
+                                    <th>Judul</th>
+                                    <th>File</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                foreach ($tiket as $row) { ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $row->no_tiket ?></td>
+                                        <td><?= $row->judul_tiket ?></td>
+                                        <td>
+                                            <a href="<?= base_url('tiket/view_pdf/' . $row->no_tiket) ?>" target="_blank">Buka File PDF</a>
+                                        </td>
+                                        <td>
+                                            <?php if ($row->status_tiket == '0') {
+                                                echo '<span class= "badge badge-danger">waiting...</span>';
+                                            } else if ($row->status_tiket == '1') {
+                                                echo '<span class= "badge badge-info">process...</span>';
+                                            } else if ($row->status_tiket == '2') {
+                                                echo '<span class= "badge badge-warning">Replied...</span>';
+                                            } else {
+                                                echo '<span class= "badge badge-success">complete</span>';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url('tiket/detail_tiket/' . $row->no_tiket) ?>" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-eye"> </i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
